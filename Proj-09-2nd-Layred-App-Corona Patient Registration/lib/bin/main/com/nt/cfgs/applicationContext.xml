@@ -6,29 +6,14 @@
 	<!-- configure DataSource -->
 	<bean id="drds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
-		
-		<!-- <property name="url" value="jdbc:mysql:///sys" /> -->
+		<property name="url" value="jdbc:mysql:///sys" />
 		<property name="username" value="root" />
 		<property name="password" value="Ckj123@0909" />
-		
-		<!-- <property name="connectionProperties">
-			<props>										Collection Injection in real time Application
-				<prop key="user">root</prop>
-				<prop key="password">Ckj123@0909</prop>
-			</props>
-		</property> -->
-	</bean>
-	
-	<bean id="HcpDs" class="com.zaxxer.hikari.HikariDataSource" parent="drds">  <!-- Bean Inheritance -->
-		<property name="jdbcUrl" value="jdbc:mysql:///sys" />
-		<property name="minimumIdle" value="10" />
-		<property name="maximumPoolSize" value="20" />
-		<property name="connectionTimeout" value="2000" />
 	</bean>
 	
 	<!-- configure DAO -->
 	<bean id="patDAO" class="com.nt.dao.PatientDAOImpl">
-		<constructor-arg ref="HcpDs" />
+		<constructor-arg ref="drds" />
 	</bean>
 	
 	<!-- configure Service -->
